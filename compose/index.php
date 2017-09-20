@@ -1,5 +1,5 @@
 <?php session_start();
-    include "/header.php";
+    include "../header.php";
     function composer(){
         echo '<div class="content securestuff"><div id="content" class="editor">'; // Sets up he HTML for the editor
         $postId = htmlspecialchars($_GET["id"]); // Sets the HTML ID as a variable
@@ -47,10 +47,10 @@
             echo '<a href="writeToFile.php/?id=' . $postId . '" target="previewpane" >Delete This Post</abutton>';
         }
         echo '</div></div>'; // Close out div blocks
-        include '../template-parts/lower.php'; // Add a footer
+        include '../footer.php'; // Add a footer
     }
 
-    if ($_SESSION['username'] == 'linuxgamer'){
+    if ($_SESSION['username'] == file_get_contents('../user.txt')){
         composer(); // Checks if the user is logs in, then renders the composer
     }
     else{

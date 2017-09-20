@@ -1,13 +1,13 @@
 <?php
     session_start();
-    if($_SESSION['valid'] === true &&  $_SESSION['username'] === 'linuxgamer'){
+    if($_SESSION['valid'] === true &&  $_SESSION['username'] === file_get_contents('user.txt')){
         if (isset($_POST["update"])){
             $postId = htmlspecialchars($_POST["value"]);
-            $filename = "/posts/" . $postId . ".md";
+            $filename = "posts/" . $postId . ".md";
             echo $postId;
         }
         else{
-            $filename = "/posts/" . date("Y-m-d") . ".md";
+            $filename = "posts/" . date("Y-m-d") . ".md";
         }
         if (isset($_POST['preview'])) {
             include '/Parsedown.php';
@@ -40,7 +40,7 @@
             }
         }
         elseif($postId != null){
-            unlink("/posts/".$postId.".md");
+            unlink("posts/".$postId.".md");
             echo "The post has been deleted.";
         }
     }

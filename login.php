@@ -15,17 +15,20 @@
                 
                 <?php
                 $msg = '';
+
+                $userHash = file_get_contents('user.txt');
+                $pwHash = file_get_contents('password.hash');
                 
                 if (isset($_POST['login']) && !empty($_POST['username']) 
                     && !empty($_POST['password'])) {
                     
-                    $pwHash = '$2y$10$8zmBhMRxs8pZ8Sgf4loqJ.YT8Y8tbQW7yIMJQnJZH8xwAY9hqNQhS';
                     
-                    if ($_POST['username'] == 'linuxgamer' && 
+                    
+                    if ($_POST['username'] == $userHash && 
                         password_verify($_POST['password'], $pwHash)) {
                         $_SESSION['valid'] = true;
                         $_SESSION['timeout'] = time();
-                        $_SESSION['username'] = 'linuxgamer';
+                        $_SESSION['username'] = $userHash;
                         $_SESSION['sessionvar'] = 'auth';
                         
                         $URL="/compose";
